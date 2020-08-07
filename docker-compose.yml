@@ -47,8 +47,15 @@ services:
       - '8080:80'
     volumes: 
       - /sessions
+      - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
   redis:
     container_name: 'sc-redis'
     image: redis:latest
     ports:
       - "${HOST_MACHINE_REDIS_PORT}:6379"
+  mailhog:
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
